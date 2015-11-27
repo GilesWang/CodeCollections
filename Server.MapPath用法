@@ -1,0 +1,9 @@
+Server.MapPath()应用
+假设当前的网站目录为E:\wwwroot 应用程序虚拟目录为E:\wwwroot\company 浏览的页面路径为E:\wwwroot\company\news\ 下面的一个 aspx页面。
+在该页面中使用
+Server.MapPath("") ：返回当前页面所在的物理文件路径：E:\wwwroot\company\news
+Server.MapPath("/") ：返回应用程序根目录所在的物理文件路径：E:\wwwroot
+Server.MapPath("./") ：返回当前页面所在的物理文件路径：E:\wwwroot\company\news
+Server.MapPath("../")：返回当前页面所在的上一级的物理文件路径：E:\wwwroot\company
+Server.MapPath("~/")：返回应用程序的虚拟目录（路径）：E:\wwwroot\company
+Server.MapPath("~")：返回应用程序的虚拟目录（路径）：E:\wwwroot\company
