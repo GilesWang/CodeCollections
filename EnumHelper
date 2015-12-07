@@ -84,4 +84,96 @@ namespace MySystem.Enum
             return list;
         }
     }
+    
+    /// <summary>
+    /// 支付方式
+    /// </summary>
+    public enum PaymentTypeEnum
+    {
+        /// <summary>
+        /// 预付
+        /// </summary>
+        [DescriptionAttribute("预付")]
+        Prepaid = 0,
+        /// <summary>
+        /// 现金
+        /// </summary>
+        [DescriptionAttribute("现金")]
+        Cash = 1,
+        /// <summary>
+        /// 信用卡
+        /// </summary>
+        [DescriptionAttribute("信用卡")]
+        CreditCard = 2,
+        /// <summary>
+        /// 银行转账
+        /// </summary>
+        [DescriptionAttribute("银行转账")]
+        BankTransfer = 3,
+        /// <summary>
+        /// 结账
+        /// </summary>
+        [DescriptionAttribute("结账")]
+        Checkout = 4,
+        /// <summary>
+        /// 积分使用
+        /// </summary>
+        [DescriptionAttribute("积分使用")]
+        Integration = 5,
+        /// <summary>
+        /// Pos机
+        /// </summary>
+        [DescriptionAttribute("Pos机")]
+        Pos = 6,
+        /// <summary>
+        /// 司机POS
+        /// </summary>
+        [DescriptionAttribute("Vip卡充值")]
+        VipRecharge = 7,
+        /// <summary>
+        /// 司机POS
+        /// </summary>
+        [DescriptionAttribute("司机POS")]
+        DriverPos = 8,
+        /// <summary>
+        /// 网上支付
+        /// </summary>
+        [DescriptionAttribute("网上支付")]
+        Online = 9,
+        /// <summary>
+        /// 尊享卡支付
+        /// </summary>
+        [DescriptionAttribute("尊享卡支付")]
+        ExclusiveCard = 10,
+        /// <summary>
+        /// 只能现金/POS
+        /// </summary>
+        [DescriptionAttribute("只能现金/POS")]
+        OnlyCashPos = 11,
+        /// <summary>
+        /// 信用卡担保
+        /// </summary>
+        [DescriptionAttribute("信用卡担保")]
+        CreditGuarantees = 12,
+        /// <summary>
+        /// 电话支付
+        /// </summary>
+        [DescriptionAttribute("电话支付")]
+        Phone = 13,
+        /// <summary>
+        /// 押金结转
+        /// </summary>
+        [DescriptionAttribute("押金结转")]
+        Deposit = 14,
+        /// <summary>
+        /// 嗨卡支付
+        /// </summary>
+        [DescriptionAttribute("嗨卡支付")]
+        HaiCard = 20,
+        /// <summary>
+        /// 门店支付
+        /// </summary>
+        [DescriptionAttribute("门店支付")]
+        StoresPay = 21
+    }
 }
