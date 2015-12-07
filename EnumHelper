@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Reflection;
+using System.ComponentModel;
+
+namespace MySystem.Enum
+{
+    public static class EnumHelper
+    {
+        public static string GetEnumDescription(Type typeOfEnum, object value)
+        {
+            if (value != null)
+            {
+                if (value.GetType() == typeof(int))
+                {
+                    return GetDescriptionByValue(typeOfEnum, Convert.ToInt32(value));
+                }
+                else if (value.GetType() == typeof(string))
+                {
+                    return GetDescriptionByKey(typeOfEnum, value.ToString().Trim());
+                }
+            }
+            return "";
+        }
+        public static string GetEnumDescriptionByValue(Type typeOfEnum, object value)
+        {
+            DescriptionAttribute attributeOfVal = (DescriptionAttribute)typeOfEnum.GetField(System.Enum.GetName(typeOfEnum, (int)value)).GetCustomAttributes(typeof(DescriptionAttribute), false).First();
+            if (attributeOfVal != null)
+            {
+                return attributeOfVal.Description;
+            }
+            return string.Empty;
+        }
+        public static string GetDescriptionByValue(Type typeOfEnum, int value)
+        {
+            FieldInfo f = typeOfEnum.GetField(System.Enum.GetName(typeOfEnum, value));
+            if (f != null)
+            {
+                DescriptionAttribute attributeOfVal = (DescriptionAttribute)f.GetCustomAttributes(typeof(DescriptionAttribute), false).First();
+                if (attributeOfVal != null)
+                {
+                    return attributeOfVal.Description;
+                }
+            }
+            return string.Empty;
+        }
+        public static string GetDescriptionByKey(Type typeOfEnum, string value)
+        {
+            if (value != null)
+            {
+                FieldInfo f = typeOfEnum.GetField(value);
+                if (f != null)
+                {
+                    DescriptionAttribute attributeOfVal = (DescriptionAttribute)f.GetCustomAttributes(typeof(DescriptionAttribute), false).First();
+                    if (attributeOfVal != null)
+                    {
+                        return attributeOfVal.Description;
+                    }
+                }
+
+            }
+            return string.Empty;
+        }
+        public static Dictionary<string, string> GetEnumDescriptionAndKey(Type enumType)
+        {
+            Dictionary<string, string> list = new Dictionary<string, string>();
+            FieldInfo[] members = enumType.GetFields(BindingFlags.Static | BindingFlags.Public);
+            foreach (FieldInfo member in members)
+            {
+                list.Add(((DescriptionAttribute)member.GetCustomAttributes(typeof(DescriptionAttribute), false)[0]).Description, member.Name);
+            }
+            return list;
+        }
+        public static Dictionary<string, string> GetEnumDescriptionAndValue(Type enumType)
+        {
+            Dictionary<string, string> list = new Dictionary<string, string>();
+            FieldInfo[] members = enumType.GetFields(BindingFlags.Static | BindingFlags.Public);
+            foreach (FieldInfo member in members)
+            {
+                list.Add(((DescriptionAttribute)member.GetCustomAttributes(typeof(DescriptionAttribute), false)[0]).Description, System.Enum.Parse(enumType, member.Name).GetHashCode().ToString());
+            }
+            return list;
+        }
+    }
+}
