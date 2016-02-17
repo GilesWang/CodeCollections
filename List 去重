@@ -1,0 +1,32 @@
+  //定义一个类继承IEqualityComparer接口
+  public class PersonComparer : IEqualityComparer<Person>
+    {
+        public bool Equals(Person x, Person y)
+        {
+            return x.Name == y.Name;
+        }
+
+        public int GetHashCode(Person obj)
+        {
+            //注意此处的属性必须与上面Equals方法内的一致
+            return obj.Name.GetHashCode();
+        }
+    }
+  //集合类
+  public class Person
+    {
+        public string Name { get; set; }
+        public string Address { get; set; }
+    }
+    
+  //方法调用
+  public static void Main()
+  {
+    List<Person> lists = new List<Person>();
+    lists.Add(new Person() { Name = "wangfagui", Address = "1" });
+    lists.Add(new Person() { Name = "wangfagui", Address = "2" });
+    lists.Add(new Person() { Name = "wangfagui", Address = "3" });
+    lists.Add(new Person() { Name = "tanyiqun", Address = "1" });
+
+    lists = lists.Distinct(new PersonComparer()).ToList();
+  }
