@@ -1,0 +1,62 @@
+1、问题起源：设计供APP调用的WEB API时通常会遇到版本号的问题，版本升级时，
+   某些方法可能要升级，有些方法不需要升级，同时有些方法又可以在不同版本之间公用。
+2、接口实现方式
+   public interface IProductService
+   {
+      BaseResponse GetProduct();
+      BaseResponse UpdateProduct(Product prod);
+   }
+   
+   public class ProdctServiceV4:IProductService
+   {
+    //实现接口
+   }
+   
+   public class ProdctServiceV5:IProductService
+   {
+    //实现接口
+   }
+   
+   public class ProductServiceFatory
+   {
+      public static IProductService GetProductService(int version)
+      {
+        //工厂方法返回IProductService的实例
+      }
+   }
+   客户端调用是传递版本号，通过工厂方法，统一返回操作实例。
+   但是存在一个问题，当版本升级成V6时，只是对其中的UpdateProduct方法更改了，其他的方法没有改变，
+   如果还是按照原有的设计，则需要copy除了UpdateProduct方法以外所有的方法，显示不好。
+   这个时候我们可以考虑利用抽象类来设计。
+3、定义抽象类：
+   public abstract ProductService
+   {
+    public virtual BaseResponse GetProduct()
+    {
+    //一般性实现
+    }
+    public virtual BaseResponse UpdateProduct(Product prod)
+    {
+    //一般性实现
+    }
+   }
+   
+   public class ProductServiceV4:ProductService
+   {
+    public override BaseResponse UpdateProduct(Product prod)
+    {
+    //V4版本实现
+    }
+   }
+   
+   public class ProductServiceV5:ProductService
+   {
+    public override BaseResponse UpdateProduct(Product prod)
+    {
+    //V5版本实现
+    }
+   }
+   这样便很好的解决了版本升级带来的问题。
+   
+4、总结
+   当子类之间存在相同实现的时候可以用抽象类
