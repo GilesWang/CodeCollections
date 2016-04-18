@@ -1,0 +1,43 @@
+public abstract class BaseFactoryA
+{
+  public abstract BaseProductA GetProduct();
+  public abstract BaseProductB GetProduct();
+}
+
+public abstract class BaseFactoryB
+{
+  public abstract BaseProductA GetProduct();
+  public abstract BaseProductB GetProduct();
+}
+
+public abstract class BaseProductA
+{
+  //something
+}
+public class ConcreteProductA:BaseProductA
+{
+  //something
+}
+
+public abstract class BaseProductB
+{
+  //something
+}
+public class ConcreteProductB:BaseProductB
+{
+  //something
+}
+
+public class ConcreteFactoryA:BaseFactoryA
+{
+
+  public BaseProductA GetProductA()
+  {
+    return new ConcreteProductA();
+  }
+  
+   public BaseProductB GetProductB()
+  {
+    return new ConcreteProductB();
+  }
+}
