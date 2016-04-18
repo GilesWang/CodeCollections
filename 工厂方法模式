@@ -1,0 +1,40 @@
+public class BaseFactory
+{
+  public abstract BaseProduct GetProduct();
+}
+
+public class BaseProduct
+{
+  //something
+}
+
+public class ConcreteProductA:BaseProduct
+{
+  //something
+}
+
+public class ConcreteProductB:BaseProduct
+{
+  //something
+}
+
+public class ConcreteFactoryA:BaseFactory
+{
+  public BaseProduct GetProduct()
+  {
+    return new ConcreteProductA();
+  }
+}
+
+public class ConcreteFactoryB:BaseFactory
+{
+  public BaseProduct GetProduct()
+  {
+    return new ConcreteProductB();
+  }
+}
+
+//调用
+BaseFactory fc = new ConcreteFactoryA();
+BaseProduct product =fc.GetProduct();
+
