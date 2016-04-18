@@ -1,0 +1,35 @@
+简单工厂的具体实现
+
+public class ParentClass
+{
+  //something
+}
+
+public class ChildClassA:ParentClass
+{
+  //something
+}
+
+public class ChildClassB:ParentClass
+{
+  //something
+}
+
+public class Factory
+{
+  pulbic ParentClass Create(string classType)
+  {
+    switch(classType)
+    {
+      case "A":
+        return new ChildClassA();
+        break;
+      case "B":
+        return new ChildClassB();
+        break;
+      default:
+        return new ChildClassA();
+        break;
+    }
+  }
+}
