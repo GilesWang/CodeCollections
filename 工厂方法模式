@@ -1,9 +1,9 @@
-public class BaseFactory
+public abstract class BaseFactory
 {
   public abstract BaseProduct GetProduct();
 }
 
-public class BaseProduct
+public abstract class BaseProduct
 {
   //something
 }
