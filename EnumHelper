@@ -84,6 +84,8 @@ namespace MySystem.Enum
             return list;
         }
     }
+
+    test
     
     /// <summary>
     /// 支付方式
